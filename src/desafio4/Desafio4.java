@@ -8,7 +8,6 @@ public class Desafio4 {
         LoginFrm form = new LoginFrm();
         form.setVisible(true);
         
-       //Hola mundo
     }
     
 }
