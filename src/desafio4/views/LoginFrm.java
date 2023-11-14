@@ -127,7 +127,10 @@ public class LoginFrm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueBtnActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        
+        LayoutFrm form = new LayoutFrm();
+        form.setVisible(true);
     }//GEN-LAST:event_continueBtnActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
