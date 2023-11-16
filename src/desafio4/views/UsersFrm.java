@@ -3,10 +3,10 @@ package desafio4.views;
 import controllers.UsersCtrl;
 import helpers.Validators;
 import java.util.List;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import models.User;
 import models.UserType;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -15,20 +15,44 @@ public class UsersFrm extends javax.swing.JPanel {
     private List<UserType> userTypes;
     private List<User> users;
     private UsersCtrl controller;
+    private User selectedUser;
 
     public UsersFrm() {
         initComponents();
         
-        Validators.allowNumbers(phoneTxt, 8);
-        
         initData();
         initUserTypes();
         initTable();
+        
+        Validators.allowNumbers(phoneTxt, 8);
+        noSelectedDataMode();
     }
     
     public void initData() {
         controller = new UsersCtrl();
         userTypes = controller.getUserTypes();
+    }
+    
+    public void noSelectedDataMode() {
+        addBtn.setEnabled(true);
+        
+        updateBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
+        resetPasswordBtn.setEnabled(false);
+        
+        passwordTxt.setEnabled(true);
+        codeTxt.setEnabled(true);
+    }
+    
+    public void selectedDataMode() {
+        addBtn.setEnabled(false);
+        
+        updateBtn.setEnabled(true);
+        deleteBtn.setEnabled(true);
+        resetPasswordBtn.setEnabled(true);
+        
+        passwordTxt.setEnabled(false);
+        codeTxt.setEnabled(false);
     }
     
     public void initTable() {
@@ -47,6 +71,17 @@ public class UsersFrm extends javax.swing.JPanel {
         }
         
         userTbl.setModel(tableModel);
+    }
+    
+    public void clearFields() {
+        Validators.clearTextField(codeTxt);
+        Validators.clearTextField(emailTxt);
+        Validators.clearTextField(phoneTxt);
+        Validators.clearTextField(passwordTxt);
+        Validators.clearTextField(nameTxt);
+        userTypesCb.setSelectedIndex(0);
+        
+        noSelectedDataMode();
     }
     
     public void initUserTypes() {
@@ -70,7 +105,6 @@ public class UsersFrm extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        passwordTxt = new javax.swing.JTextField();
         emailTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -80,14 +114,20 @@ public class UsersFrm extends javax.swing.JPanel {
         codeTxt = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         userTypesCb = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        nameTxt = new javax.swing.JTextField();
+        passwordTxt = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         addBtn = new javax.swing.JButton();
-        continueBtn2 = new javax.swing.JButton();
-        continueBtn3 = new javax.swing.JButton();
-        continueBtn4 = new javax.swing.JButton();
-        continueBtn = new javax.swing.JButton();
+        updateBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
+        clearBtn = new javax.swing.JButton();
+        resetPasswordBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         userTbl = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        searchTxt = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -96,17 +136,6 @@ public class UsersFrm extends javax.swing.JPanel {
 
         jPanel4.setBackground(new java.awt.Color(245, 251, 248));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        passwordTxt.setBackground(new java.awt.Color(255, 255, 255));
-        passwordTxt.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        passwordTxt.setForeground(new java.awt.Color(51, 51, 51));
-        passwordTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(200, 212, 218), 1, true));
-        passwordTxt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                passwordTxtKeyReleased(evt);
-            }
-        });
-        jPanel4.add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 340, 40));
 
         emailTxt.setBackground(new java.awt.Color(255, 255, 255));
         emailTxt.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -122,22 +151,22 @@ public class UsersFrm extends javax.swing.JPanel {
                 emailTxtKeyReleased(evt);
             }
         });
-        jPanel4.add(emailTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 340, 40));
+        jPanel4.add(emailTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 340, 40));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(154, 168, 180));
         jLabel2.setText("Contraseña");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(154, 168, 180));
         jLabel3.setText("Correo electrónico");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(154, 168, 180));
         jLabel4.setText("Teléfono");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
         phoneTxt.setBackground(new java.awt.Color(255, 255, 255));
         phoneTxt.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -148,12 +177,12 @@ public class UsersFrm extends javax.swing.JPanel {
                 phoneTxtKeyReleased(evt);
             }
         });
-        jPanel4.add(phoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 340, 40));
+        jPanel4.add(phoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 340, 40));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(154, 168, 180));
         jLabel5.setText("Tipo de usuario");
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
 
         codeTxt.setBackground(new java.awt.Color(255, 255, 255));
         codeTxt.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -179,9 +208,36 @@ public class UsersFrm extends javax.swing.JPanel {
         userTypesCb.setForeground(new java.awt.Color(51, 51, 51));
         userTypesCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1" }));
         userTypesCb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 212, 218)));
-        jPanel4.add(userTypesCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 340, 40));
+        jPanel4.add(userTypesCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 340, 40));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 380, 480));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(154, 168, 180));
+        jLabel7.setText("Nombre");
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        nameTxt.setBackground(new java.awt.Color(255, 255, 255));
+        nameTxt.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        nameTxt.setForeground(new java.awt.Color(51, 51, 51));
+        nameTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(200, 212, 218), 1, true));
+        nameTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameTxtActionPerformed(evt);
+            }
+        });
+        nameTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameTxtKeyReleased(evt);
+            }
+        });
+        jPanel4.add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 340, 40));
+
+        passwordTxt.setBackground(new java.awt.Color(255, 255, 255));
+        passwordTxt.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        passwordTxt.setForeground(new java.awt.Color(51, 51, 51));
+        passwordTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(200, 212, 218), 1, true));
+        jPanel4.add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 340, 40));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 380, 560));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -199,59 +255,59 @@ public class UsersFrm extends javax.swing.JPanel {
         });
         jPanel2.add(addBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 90, 40));
 
-        continueBtn2.setBackground(new java.awt.Color(82, 190, 127));
-        continueBtn2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        continueBtn2.setForeground(new java.awt.Color(255, 255, 255));
-        continueBtn2.setText("Actualizar");
-        continueBtn2.setBorder(null);
-        continueBtn2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        continueBtn2.addActionListener(new java.awt.event.ActionListener() {
+        updateBtn.setBackground(new java.awt.Color(82, 190, 127));
+        updateBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        updateBtn.setForeground(new java.awt.Color(255, 255, 255));
+        updateBtn.setText("Actualizar");
+        updateBtn.setBorder(null);
+        updateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                continueBtn2ActionPerformed(evt);
+                updateBtnActionPerformed(evt);
             }
         });
-        jPanel2.add(continueBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 90, 40));
+        jPanel2.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 90, 40));
 
-        continueBtn3.setBackground(new java.awt.Color(82, 190, 127));
-        continueBtn3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        continueBtn3.setForeground(new java.awt.Color(255, 255, 255));
-        continueBtn3.setText("Eliminar");
-        continueBtn3.setBorder(null);
-        continueBtn3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        continueBtn3.addActionListener(new java.awt.event.ActionListener() {
+        deleteBtn.setBackground(new java.awt.Color(82, 190, 127));
+        deleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
+        deleteBtn.setText("Eliminar");
+        deleteBtn.setBorder(null);
+        deleteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                continueBtn3ActionPerformed(evt);
+                deleteBtnActionPerformed(evt);
             }
         });
-        jPanel2.add(continueBtn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 90, 40));
+        jPanel2.add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 90, 40));
 
-        continueBtn4.setBackground(new java.awt.Color(82, 190, 127));
-        continueBtn4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        continueBtn4.setForeground(new java.awt.Color(255, 255, 255));
-        continueBtn4.setText("Limpiar");
-        continueBtn4.setBorder(null);
-        continueBtn4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        continueBtn4.addActionListener(new java.awt.event.ActionListener() {
+        clearBtn.setBackground(new java.awt.Color(82, 190, 127));
+        clearBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        clearBtn.setForeground(new java.awt.Color(255, 255, 255));
+        clearBtn.setText("Limpiar");
+        clearBtn.setBorder(null);
+        clearBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                continueBtn4ActionPerformed(evt);
+                clearBtnActionPerformed(evt);
             }
         });
-        jPanel2.add(continueBtn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 90, 40));
+        jPanel2.add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 90, 40));
 
-        continueBtn.setBackground(new java.awt.Color(82, 190, 127));
-        continueBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        continueBtn.setForeground(new java.awt.Color(255, 255, 255));
-        continueBtn.setText("Reestablecer contraseña");
-        continueBtn.setBorder(null);
-        continueBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        continueBtn.addActionListener(new java.awt.event.ActionListener() {
+        resetPasswordBtn.setBackground(new java.awt.Color(82, 190, 127));
+        resetPasswordBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        resetPasswordBtn.setForeground(new java.awt.Color(255, 255, 255));
+        resetPasswordBtn.setText("Reestablecer contraseña");
+        resetPasswordBtn.setBorder(null);
+        resetPasswordBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        resetPasswordBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                continueBtnActionPerformed(evt);
+                resetPasswordBtnActionPerformed(evt);
             }
         });
-        jPanel2.add(continueBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 190, 40));
+        jPanel2.add(resetPasswordBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 190, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, 290, 130));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 560, 290, 130));
 
         userTbl.setBackground(new java.awt.Color(255, 255, 255));
         userTbl.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -271,9 +327,38 @@ public class UsersFrm extends javax.swing.JPanel {
         userTbl.setGridColor(new java.awt.Color(43, 111, 145));
         userTbl.setSelectionBackground(new java.awt.Color(43, 111, 145));
         userTbl.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        userTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userTblMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(userTbl);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 620, 600));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 620, 540));
+
+        jPanel3.setBackground(new java.awt.Color(245, 251, 248));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        searchTxt.setBackground(new java.awt.Color(255, 255, 255));
+        searchTxt.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        searchTxt.setForeground(new java.awt.Color(51, 51, 51));
+        searchTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(200, 212, 218), 1, true));
+        searchTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchTxtKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchTxtKeyTyped(evt);
+            }
+        });
+        jPanel3.add(searchTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 580, 40));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(154, 168, 180));
+        jLabel8.setText("Buscar");
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 620, 110));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 690));
     }// </editor-fold>//GEN-END:initComponents
@@ -282,18 +367,30 @@ public class UsersFrm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_emailTxtActionPerformed
 
-    private void continueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueBtnActionPerformed
-
-    }//GEN-LAST:event_continueBtnActionPerformed
+    private void resetPasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPasswordBtnActionPerformed
+        int response = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que deseas reestablecer la contraseña al usuario? Los cambios son irreversibles.", "Confirmación", JOptionPane.YES_NO_OPTION);
+        
+        if (response == JOptionPane.YES_OPTION) {
+            boolean ok = controller.resetPassword(selectedUser.getIdentificationCode());
+            
+            if(!ok) return;
+            
+            JOptionPane.showMessageDialog(null, "Patron, el usuario fue reestablecido exitosamente.");
+            
+            initTable();
+            clearFields();
+        }
+    }//GEN-LAST:event_resetPasswordBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         String code = codeTxt.getText().trim();
+        String name = nameTxt.getText().trim();
         String email = emailTxt.getText().trim();
         String phone = phoneTxt.getText().trim();
         Object userType = userTypesCb.getSelectedItem();
         String password = passwordTxt.getText().trim();
         
-        if (code.length() == 0 || email.length() == 0 || phone.length() == 0 || userType == "Selecciona un tipo de usuario" || password.length() == 0) {
+        if (code.length() == 0 || name.length() == 0 || email.length() == 0 || phone.length() == 0 || userType == "Selecciona un tipo de usuario" || password.length() == 0) {
             JOptionPane.showMessageDialog(null, "No se permiten campos vacios");
             return;
         }
@@ -325,6 +422,7 @@ public class UsersFrm extends javax.swing.JPanel {
         
         user.setIdentificationCode(code);
         user.setEmail(email);
+        user.setName(name);
         user.setPassword(encryptedPassword);
         user.setPhone(phone);
         user.setHasToResetPassword(false);
@@ -337,20 +435,79 @@ public class UsersFrm extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Se creo el usuario correctamente.");
         
         initTable();
-        
+        clearFields();
     }//GEN-LAST:event_addBtnActionPerformed
 
-    private void continueBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueBtn2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_continueBtn2ActionPerformed
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        String code = selectedUser.getIdentificationCode();
+        String email = emailTxt.getText().trim();
+        String name = nameTxt.getText().trim();
+        String phone = phoneTxt.getText().trim();
+        Object userType = userTypesCb.getSelectedItem();
+        
+        if (email.length() == 0 || name.length() == 0 || phone.length() == 0 || userType == "Selecciona un tipo de usuario") {
+            JOptionPane.showMessageDialog(null, "No se permiten campos vacios");
+            return;
+        }
+        
+        boolean isEmailValid = Validators.matchesRegex(email, Validators.getEmailRegex());
+        
+        if(!isEmailValid) {
+            JOptionPane.showMessageDialog(null, "El correo electrónico ingresado es invalido.");
+            return;
+        }
+        
+        int userTypeId = -1;
+        
+        for (int i = 0; i < userTypes.size(); i++) {
+            if(userTypes.get(i).getUserTypeName().equals(userType)) {
+                userTypeId = userTypes.get(i).getUserTypeId();
+                break;
+            }
+        }
+        
+        if(userTypeId == -1) {
+            JOptionPane.showMessageDialog(null, "No se encontró el tipo de usuario seleccionado.");
+            return;
+        }
+        
+        User user = new User();
+        
+        user.setEmail(email);
+        user.setPhone(phone);
+        user.setHasToResetPassword(false);
+        user.setUserTypeId(userTypeId);
+        user.setName(name);
+        
+        boolean isOk = controller.updateUser(user, code);
+        
+        if(!isOk) return;
+        
+        JOptionPane.showMessageDialog(null, "Se creo el usuario correctamente.");
+        
+        initTable();
+        clearFields();
+    }//GEN-LAST:event_updateBtnActionPerformed
 
-    private void continueBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueBtn3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_continueBtn3ActionPerformed
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        int response = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que deseas eliminar al usuario? Los cambios son irreversibles.", "Confirmación", JOptionPane.YES_NO_OPTION);
+        
+        if (response == JOptionPane.YES_OPTION) {
+            boolean ok = controller.deleteUser(selectedUser.getIdentificationCode());
+            
+            if(!ok) return;
+            
+            JOptionPane.showMessageDialog(null, "Patron, el usuario fue eliminado exitosamente.");
+            
+            initTable();
+            clearFields();
+        }
+    }//GEN-LAST:event_deleteBtnActionPerformed
 
-    private void continueBtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueBtn4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_continueBtn4ActionPerformed
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+        clearFields();
+        noSelectedDataMode();
+    }//GEN-LAST:event_clearBtnActionPerformed
 
     private void codeTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codeTxtKeyReleased
         String code = codeTxt.getText();
@@ -378,35 +535,100 @@ public class UsersFrm extends javax.swing.JPanel {
         
     }//GEN-LAST:event_phoneTxtKeyReleased
 
-    private void passwordTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTxtKeyReleased
-        String password = passwordTxt.getText();
-        boolean isOk = Validators.checkTextLength(password, 16);
+    private void userTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTblMouseClicked
+        int modelRowIndex = userTbl.convertRowIndexToModel(userTbl.getSelectedRow());
+
+        Object codigo = userTbl.getModel().getValueAt(modelRowIndex, 0);
+        
+        User user = null;
+        
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getIdentificationCode().equals(codigo.toString())) {
+                user = users.get(i);
+                break;
+            }
+        }
+        
+        if (user == null) {
+            JOptionPane.showMessageDialog(null, "El usuario seleccionado no fue encontrado.");
+            return;
+        }
+        
+        selectedUser = user;
+        
+        selectedDataMode();
+        
+        int userTypeId = -1;
+        
+        for (int i = 0; i < userTypes.size(); i++) {
+            if (userTypes.get(i).getUserTypeName().equals(user.getUserTypeName())) {
+                userTypeId = userTypes.get(i).getUserTypeId();
+                break;
+            }
+        }
+        
+        if (userTypeId == -1) {
+            JOptionPane.showMessageDialog(null, "El tipo de usuario no fue encontrado.");
+            return;
+        }
+        
+        codeTxt.setText(user.getIdentificationCode());
+        emailTxt.setText(user.getEmail());
+        phoneTxt.setText(user.getPhone());
+        nameTxt.setText(user.getName());
+        userTypesCb.setSelectedIndex(userTypeId);
+    }//GEN-LAST:event_userTblMouseClicked
+
+    private void nameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameTxtActionPerformed
+
+    private void nameTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTxtKeyReleased
+        String name = nameTxt.getText();
+        boolean isOk = Validators.checkTextLength(name, 100);
         
         if(!isOk) {
-            passwordTxt.setText(password.substring(0, 16));
+            nameTxt.setText(name.substring(0, 100));
         }
-    }//GEN-LAST:event_passwordTxtKeyReleased
+    }//GEN-LAST:event_nameTxtKeyReleased
+
+    private void searchTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTxtKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTxtKeyReleased
+
+    private void searchTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTxtKeyTyped
+        DefaultTableModel model = (DefaultTableModel) userTbl.getModel();
+        TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<DefaultTableModel>(model);
+        
+        userTbl.setRowSorter(rowSorter);
+        rowSorter.setRowFilter(RowFilter.regexFilter(searchTxt.getText()));
+    }//GEN-LAST:event_searchTxtKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
+    private javax.swing.JButton clearBtn;
     private javax.swing.JTextField codeTxt;
-    private javax.swing.JButton continueBtn;
-    private javax.swing.JButton continueBtn2;
-    private javax.swing.JButton continueBtn3;
-    private javax.swing.JButton continueBtn4;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JTextField emailTxt;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField passwordTxt;
+    private javax.swing.JTextField nameTxt;
+    private javax.swing.JPasswordField passwordTxt;
     private javax.swing.JTextField phoneTxt;
+    private javax.swing.JButton resetPasswordBtn;
+    private javax.swing.JTextField searchTxt;
+    private javax.swing.JButton updateBtn;
     private javax.swing.JTable userTbl;
     private javax.swing.JComboBox<String> userTypesCb;
     // End of variables declaration//GEN-END:variables

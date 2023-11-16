@@ -4,18 +4,25 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import models.User;
 
 public class LayoutFrm extends javax.swing.JFrame {
     private Color pressedButtonColor = new Color(43, 111, 145);
     private Color defaultButtonColor = new Color(65,167,218);
+    private User loggedUser;
 
-    public LayoutFrm() {
+    public LayoutFrm(User user) {
         initComponents();
+        
+        loggedUser = user;
         
         this.setLocationRelativeTo(null);
         
         WelcomeFrm form = new WelcomeFrm();
         setContent(form);
+        
+        userLbl.setText(loggedUser.getName());
+        userTypeLbl.setText(loggedUser.getUserTypeName());
     }
     
     private void setContent(JPanel content) {
@@ -37,9 +44,9 @@ public class LayoutFrm extends javax.swing.JFrame {
         sidebar = new javax.swing.JPanel();
         logoutBtn = new javax.swing.JButton();
         userBtn = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        userTypeLbl = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        userLbl = new javax.swing.JLabel();
         inventoryBtn = new javax.swing.JButton();
         navbar = new javax.swing.JPanel();
         exitBtn = new javax.swing.JButton();
@@ -103,20 +110,20 @@ public class LayoutFrm extends javax.swing.JFrame {
         });
         sidebar.add(userBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 170, 40));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Administrador");
-        sidebar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 630, 170, -1));
+        userTypeLbl.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
+        userTypeLbl.setForeground(new java.awt.Color(255, 255, 255));
+        userTypeLbl.setText("Administrador");
+        sidebar.add(userTypeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 630, 170, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Libreria");
         sidebar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Eduardo López");
-        sidebar.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, 170, -1));
+        userLbl.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        userLbl.setForeground(new java.awt.Color(255, 255, 255));
+        userLbl.setText("Eduardo López");
+        sidebar.add(userLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, 170, -1));
 
         inventoryBtn.setBackground(new java.awt.Color(65, 167, 218));
         inventoryBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -177,7 +184,10 @@ public class LayoutFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_exitBtnActionPerformed
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        
+        LoginFrm form = new LoginFrm();
+        form.setVisible(true);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void inventoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryBtnActionPerformed
@@ -214,52 +224,17 @@ public class LayoutFrm extends javax.swing.JFrame {
         setContent(form);
     }//GEN-LAST:event_userBtnActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LayoutFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LayoutFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LayoutFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LayoutFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LayoutFrm().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel containerPanel;
     private javax.swing.JButton exitBtn;
     private javax.swing.JButton inventoryBtn;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JPanel navbar;
     private javax.swing.JPanel sidebar;
     private javax.swing.JButton userBtn;
+    private javax.swing.JLabel userLbl;
+    private javax.swing.JLabel userTypeLbl;
     // End of variables declaration//GEN-END:variables
 }

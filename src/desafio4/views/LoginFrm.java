@@ -1,13 +1,18 @@
 package desafio4.views;
 
+import controllers.UsersCtrl;
+import helpers.Validators;
 import javax.swing.JOptionPane;
+import models.User;
 
 public class LoginFrm extends javax.swing.JFrame {
-
+    private UsersCtrl controller;
+    
     public LoginFrm() {
         initComponents();
         
         this.setLocationRelativeTo(null);
+        controller = new UsersCtrl();
     }
 
     /**
@@ -23,10 +28,10 @@ public class LoginFrm extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        passwordTxt = new javax.swing.JTextField();
         userTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        passwordTxt = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         continueBtn = new javax.swing.JButton();
         exitBtn = new javax.swing.JButton();
@@ -60,12 +65,6 @@ public class LoginFrm extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(245, 251, 248));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        passwordTxt.setBackground(new java.awt.Color(255, 255, 255));
-        passwordTxt.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        passwordTxt.setForeground(new java.awt.Color(51, 51, 51));
-        passwordTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(200, 212, 218), 1, true));
-        jPanel4.add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 340, 40));
-
         userTxt.setBackground(new java.awt.Color(255, 255, 255));
         userTxt.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         userTxt.setForeground(new java.awt.Color(51, 51, 51));
@@ -73,6 +72,11 @@ public class LoginFrm extends javax.swing.JFrame {
         userTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userTxtActionPerformed(evt);
+            }
+        });
+        userTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                userTxtKeyReleased(evt);
             }
         });
         jPanel4.add(userTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 340, 40));
@@ -86,6 +90,12 @@ public class LoginFrm extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(154, 168, 180));
         jLabel3.setText("Usuario");
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        passwordTxt.setBackground(new java.awt.Color(255, 255, 255));
+        passwordTxt.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        passwordTxt.setForeground(new java.awt.Color(51, 51, 51));
+        passwordTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(200, 212, 218), 1, true));
+        jPanel4.add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 340, 40));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 400, 240));
 
@@ -127,9 +137,41 @@ public class LoginFrm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueBtnActionPerformed
-        this.dispose();
+        String email = userTxt.getText().trim();
+        String password = passwordTxt.getText().trim();
         
-        LayoutFrm form = new LayoutFrm();
+        if (email.length() == 0 || password.length() == 0) {
+            JOptionPane.showMessageDialog(null, "No se permiten campos vacios");
+            return;
+        }
+        
+        boolean isEmailValid = Validators.matchesRegex(email, Validators.getEmailRegex());
+        
+        if(!isEmailValid) {
+            JOptionPane.showMessageDialog(null, "El correo electrónico ingresado es invalido.");
+            return;
+        }
+        
+        boolean userExists = controller.checkIfUserExists(email);
+        
+        if (!userExists) {
+            JOptionPane.showMessageDialog(null, "El usuario que usted ha ingresado no existe en nuestros registros. Lo sentimos.");
+            return;
+        }
+        
+        boolean isLoggedIn = controller.checkPassword(email, password);
+        
+        if (!isLoggedIn) {
+            JOptionPane.showMessageDialog(null, "Tu contraseña es incorrecta.");
+            return;
+        }
+        
+        User user = controller.getLoggedUser(email);
+        
+        if (user == null) return;
+        
+        this.dispose();
+        LayoutFrm form = new LayoutFrm(user);
         form.setVisible(true);
     }//GEN-LAST:event_continueBtnActionPerformed
 
@@ -144,6 +186,15 @@ public class LoginFrm extends javax.swing.JFrame {
     private void userTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_userTxtActionPerformed
+
+    private void userTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userTxtKeyReleased
+        String email = userTxt.getText();
+        boolean isOk = Validators.checkTextLength(email, 100);
+        
+        if(!isOk) {
+            userTxt.setText(email.substring(0, 99));
+        }
+    }//GEN-LAST:event_userTxtKeyReleased
 
     /**
      * @param args the command line arguments
@@ -190,7 +241,7 @@ public class LoginFrm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField passwordTxt;
+    private javax.swing.JPasswordField passwordTxt;
     private javax.swing.JTextField userTxt;
     // End of variables declaration//GEN-END:variables
 }

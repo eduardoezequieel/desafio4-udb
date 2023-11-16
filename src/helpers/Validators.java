@@ -5,6 +5,7 @@ import javax.swing.JTextField;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 
 public class Validators {
@@ -28,6 +29,19 @@ public class Validators {
     public static boolean matchesRegex(String text, String regex) {
         return Pattern.matches(regex, text);
     }
+    
+    public static void clearTextField(JTextField textField) {
+    Document document = textField.getDocument();
+
+    AbstractDocument abstractDocument = (AbstractDocument) document;
+    DocumentFilter documentFilter = abstractDocument.getDocumentFilter();
+    abstractDocument.setDocumentFilter(null);
+
+    textField.setText("");
+
+    abstractDocument.setDocumentFilter(documentFilter);
+}
+
     
     public static void allowNumbers(JTextField textField, int maxLength) {
         ((AbstractDocument) textField.getDocument()).setDocumentFilter(new DocumentFilter() {

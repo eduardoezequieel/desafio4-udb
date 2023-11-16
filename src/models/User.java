@@ -58,8 +58,17 @@ public class User {
         this.userTypeName = userTypeName;
     }
     
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     private String identificationCode;
     private String password;
+    private String name;
     private String email;
     private int userTypeId;
     private String userTypeName;
