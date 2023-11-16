@@ -48,6 +48,8 @@ public class LayoutFrm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         userLbl = new javax.swing.JLabel();
         inventoryBtn = new javax.swing.JButton();
+        permissionBtn = new javax.swing.JButton();
+        configBtn = new javax.swing.JButton();
         navbar = new javax.swing.JPanel();
         exitBtn = new javax.swing.JButton();
         containerPanel = new javax.swing.JPanel();
@@ -113,7 +115,7 @@ public class LayoutFrm extends javax.swing.JFrame {
         userTypeLbl.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
         userTypeLbl.setForeground(new java.awt.Color(255, 255, 255));
         userTypeLbl.setText("Administrador");
-        sidebar.add(userTypeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 630, 170, -1));
+        sidebar.add(userTypeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 170, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,7 +125,7 @@ public class LayoutFrm extends javax.swing.JFrame {
         userLbl.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         userLbl.setForeground(new java.awt.Color(255, 255, 255));
         userLbl.setText("Eduardo López");
-        sidebar.add(userLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, 170, -1));
+        sidebar.add(userLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 170, -1));
 
         inventoryBtn.setBackground(new java.awt.Color(65, 167, 218));
         inventoryBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -149,6 +151,56 @@ public class LayoutFrm extends javax.swing.JFrame {
             }
         });
         sidebar.add(inventoryBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 170, 40));
+
+        permissionBtn.setBackground(new java.awt.Color(65, 167, 218));
+        permissionBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        permissionBtn.setForeground(new java.awt.Color(255, 255, 255));
+        permissionBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desafio4/resources/library-svgrepo-com.png"))); // NOI18N
+        permissionBtn.setText("   Prestamos");
+        permissionBtn.setBorder(null);
+        permissionBtn.setBorderPainted(false);
+        permissionBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        permissionBtn.setFocusable(false);
+        permissionBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        permissionBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                permissionBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                permissionBtnMouseExited(evt);
+            }
+        });
+        permissionBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                permissionBtnActionPerformed(evt);
+            }
+        });
+        sidebar.add(permissionBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 170, 40));
+
+        configBtn.setBackground(new java.awt.Color(65, 167, 218));
+        configBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        configBtn.setForeground(new java.awt.Color(255, 255, 255));
+        configBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desafio4/resources/library-svgrepo-com.png"))); // NOI18N
+        configBtn.setText("   Configuración");
+        configBtn.setBorder(null);
+        configBtn.setBorderPainted(false);
+        configBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        configBtn.setFocusable(false);
+        configBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        configBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                configBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                configBtnMouseExited(evt);
+            }
+        });
+        configBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configBtnActionPerformed(evt);
+            }
+        });
+        sidebar.add(configBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, 170, 40));
 
         getContentPane().add(sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 720));
 
@@ -224,14 +276,40 @@ public class LayoutFrm extends javax.swing.JFrame {
         setContent(form);
     }//GEN-LAST:event_userBtnActionPerformed
 
+    private void permissionBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_permissionBtnMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_permissionBtnMouseEntered
+
+    private void permissionBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_permissionBtnMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_permissionBtnMouseExited
+
+    private void permissionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_permissionBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_permissionBtnActionPerformed
+
+    private void configBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configBtnMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_configBtnMouseEntered
+
+    private void configBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configBtnMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_configBtnMouseExited
+
+    private void configBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configBtnActionPerformed
+        System.out.println("test");
+    }//GEN-LAST:event_configBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton configBtn;
     private javax.swing.JPanel containerPanel;
     private javax.swing.JButton exitBtn;
     private javax.swing.JButton inventoryBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JPanel navbar;
+    private javax.swing.JButton permissionBtn;
     private javax.swing.JPanel sidebar;
     private javax.swing.JButton userBtn;
     private javax.swing.JLabel userLbl;
