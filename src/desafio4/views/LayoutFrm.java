@@ -155,7 +155,7 @@ public class LayoutFrm extends javax.swing.JFrame {
         permissionBtn.setBackground(new java.awt.Color(65, 167, 218));
         permissionBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         permissionBtn.setForeground(new java.awt.Color(255, 255, 255));
-        permissionBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desafio4/resources/library-svgrepo-com.png"))); // NOI18N
+        permissionBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desafio4/resources/share-2-svgrepo-com.png"))); // NOI18N
         permissionBtn.setText("   Prestamos");
         permissionBtn.setBorder(null);
         permissionBtn.setBorderPainted(false);
@@ -180,7 +180,7 @@ public class LayoutFrm extends javax.swing.JFrame {
         configBtn.setBackground(new java.awt.Color(65, 167, 218));
         configBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         configBtn.setForeground(new java.awt.Color(255, 255, 255));
-        configBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desafio4/resources/library-svgrepo-com.png"))); // NOI18N
+        configBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desafio4/resources/settings-svgrepo-com.png"))); // NOI18N
         configBtn.setText("   Configuración");
         configBtn.setBorder(null);
         configBtn.setBorderPainted(false);
@@ -277,11 +277,11 @@ public class LayoutFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_userBtnActionPerformed
 
     private void permissionBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_permissionBtnMouseEntered
-        // TODO add your handling code here:
+        permissionBtn.setBackground(pressedButtonColor);
     }//GEN-LAST:event_permissionBtnMouseEntered
 
     private void permissionBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_permissionBtnMouseExited
-        // TODO add your handling code here:
+        permissionBtn.setBackground(defaultButtonColor);
     }//GEN-LAST:event_permissionBtnMouseExited
 
     private void permissionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_permissionBtnActionPerformed
@@ -289,11 +289,11 @@ public class LayoutFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_permissionBtnActionPerformed
 
     private void configBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configBtnMouseEntered
-        // TODO add your handling code here:
+        configBtn.setBackground(pressedButtonColor);
     }//GEN-LAST:event_configBtnMouseEntered
 
     private void configBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configBtnMouseExited
-        // TODO add your handling code here:
+        configBtn.setBackground(defaultButtonColor);
     }//GEN-LAST:event_configBtnMouseExited
 
     private void configBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configBtnActionPerformed
