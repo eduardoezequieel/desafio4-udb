@@ -1,7 +1,9 @@
 package desafio4;
 
+import controllers.UsersCtrl;
 import desafio4.views.LoginFrm;
 import helpers.DatabaseConnection;
+import helpers.Validators;
 
 public class Desafio4 {
 
@@ -9,7 +11,6 @@ public class Desafio4 {
         LoginFrm form = new LoginFrm();
         form.setVisible(true);
         
-        DatabaseConnection databaseconnection= new DatabaseConnection();
     }
     
 }

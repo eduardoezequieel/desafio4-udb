@@ -1,5 +1,6 @@
 package desafio4.views;
 
+import helpers.LoggedUser;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -11,10 +12,10 @@ public class LayoutFrm extends javax.swing.JFrame {
     private Color defaultButtonColor = new Color(65,167,218);
     private User loggedUser;
 
-    public LayoutFrm(User user) {
+    public LayoutFrm() {
         initComponents();
         
-        loggedUser = user;
+        loggedUser = LoggedUser.getUser();
         
         this.setLocationRelativeTo(null);
         

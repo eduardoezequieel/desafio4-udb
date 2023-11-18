@@ -1,5 +1,7 @@
 package models;
 
+import controllers.UsersCtrl;
+
 public class User {
 
     public String getIdentificationCode() {

@@ -1,6 +1,7 @@
 package desafio4.views;
 
 import controllers.UsersCtrl;
+import helpers.LoggedUser;
 import helpers.Validators;
 import javax.swing.JOptionPane;
 import models.User;
@@ -168,10 +169,12 @@ public class LoginFrm extends javax.swing.JFrame {
         
         User user = controller.getLoggedUser(email);
         
+        LoggedUser.setUser(user);
+        
         if (user == null) return;
         
         this.dispose();
-        LayoutFrm form = new LayoutFrm(user);
+        LayoutFrm form = new LayoutFrm();
         form.setVisible(true);
     }//GEN-LAST:event_continueBtnActionPerformed
 

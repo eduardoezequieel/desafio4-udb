@@ -1,6 +1,7 @@
 package controllers;
 
 import helpers.DatabaseConnection;
+import helpers.LoggedUser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +22,8 @@ public class UsersCtrl {
         try {
             DatabaseConnection dbcn = new DatabaseConnection();
             Connection cn = dbcn.getConnection();
+            
+            User user = LoggedUser.getUser();
             
             String sql = "SELECT*FROM usertype";
             Statement st = cn.createStatement();
