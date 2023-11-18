@@ -173,6 +173,11 @@ public class LoginFrm extends javax.swing.JFrame {
         
         if (user == null) return;
         
+        if(password.equals("contraseña123")) {
+            JOptionPane.showMessageDialog(null, "Debes actualizar tu contraseña");
+            return;
+        }
+        
         this.dispose();
         LayoutFrm form = new LayoutFrm();
         form.setVisible(true);
