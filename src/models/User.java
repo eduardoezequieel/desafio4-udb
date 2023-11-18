@@ -76,4 +76,8 @@ public class User {
     private String userTypeName;
     private boolean hasToResetPassword;
     private String phone;
+
+    public int getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

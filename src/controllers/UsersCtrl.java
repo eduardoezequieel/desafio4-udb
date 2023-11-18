@@ -14,6 +14,34 @@ import models.UserType;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class UsersCtrl {
+
+    public boolean actualizaContrasena(String code, String nuevaContrasena) {
+        
+        boolean response = false;
+        String encryptedPassword = DigestUtils.sha1Hex(nuevaContrasena);
+        
+        try {
+            DatabaseConnection dbcn = new DatabaseConnection();
+            Connection cn = dbcn.getConnection();
+            
+            String sql = "UPDATE user SET password = ?, hasToResetPassword = 0 WHERE identificationCode = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            
+            pst.setString(1, encryptedPassword);
+            pst.setString(2, code);
+            
+            if(!pst.execute()) response = true;
+            
+            cn.close();
+            pst.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Hubo un problema al reestablecer la contraseña al usuario. Por favor contacte con el administrador.");
+            System.out.println(e.getMessage());
+        }
+        
+        return response;
+        
+    }
     public UsersCtrl() {}
     
     public List<UserType> getUserTypes() {
