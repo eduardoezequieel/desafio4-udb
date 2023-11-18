@@ -1,22 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package desafio4.views;
 
+import helpers.ApplicationContext;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import javax.swing.JPanel;
 
-/**
- *
- * @author Eduardo
- */
 public class SelectionInventoryFrm extends javax.swing.JPanel {
     private Color pressedButtonColor = new Color(43, 111, 145);
     private Color defaultButtonColor = new Color(65,167,218);
+    private JPanel containerPanel;
     
     public SelectionInventoryFrm() {
         initComponents();
+        
+        containerPanel = ApplicationContext.getMainContainer();
+    }
+    
+    private void setContent(JPanel content) {
+        containerPanel.removeAll();
+        containerPanel.add(content, BorderLayout.CENTER);
+        containerPanel.revalidate();
+        containerPanel.repaint();
     }
 
     /**
@@ -29,10 +33,10 @@ public class SelectionInventoryFrm extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        userBtn = new javax.swing.JButton();
-        userBtn1 = new javax.swing.JButton();
-        userBtn2 = new javax.swing.JButton();
-        userBtn3 = new javax.swing.JButton();
+        creatorBtn = new javax.swing.JButton();
+        materialBtn = new javax.swing.JButton();
+        inventoryBtn = new javax.swing.JButton();
+        editorialBtn = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1070, 690));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -40,156 +44,156 @@ public class SelectionInventoryFrm extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        userBtn.setBackground(new java.awt.Color(65, 167, 218));
-        userBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        userBtn.setForeground(new java.awt.Color(255, 255, 255));
-        userBtn.setText("Creadores");
-        userBtn.setBorder(null);
-        userBtn.setBorderPainted(false);
-        userBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        userBtn.setFocusable(false);
-        userBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        creatorBtn.setBackground(new java.awt.Color(65, 167, 218));
+        creatorBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        creatorBtn.setForeground(new java.awt.Color(255, 255, 255));
+        creatorBtn.setText("Creadores");
+        creatorBtn.setBorder(null);
+        creatorBtn.setBorderPainted(false);
+        creatorBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        creatorBtn.setFocusable(false);
+        creatorBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                userBtnMouseEntered(evt);
+                creatorBtnMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                userBtnMouseExited(evt);
+                creatorBtnMouseExited(evt);
             }
         });
-        userBtn.addActionListener(new java.awt.event.ActionListener() {
+        creatorBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userBtnActionPerformed(evt);
+                creatorBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(userBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 220, 100));
+        jPanel1.add(creatorBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 220, 100));
 
-        userBtn1.setBackground(new java.awt.Color(65, 167, 218));
-        userBtn1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        userBtn1.setForeground(new java.awt.Color(255, 255, 255));
-        userBtn1.setText("Material base");
-        userBtn1.setBorder(null);
-        userBtn1.setBorderPainted(false);
-        userBtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        userBtn1.setFocusable(false);
-        userBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+        materialBtn.setBackground(new java.awt.Color(65, 167, 218));
+        materialBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        materialBtn.setForeground(new java.awt.Color(255, 255, 255));
+        materialBtn.setText("Material base");
+        materialBtn.setBorder(null);
+        materialBtn.setBorderPainted(false);
+        materialBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        materialBtn.setFocusable(false);
+        materialBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                userBtn1MouseEntered(evt);
+                materialBtnMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                userBtn1MouseExited(evt);
+                materialBtnMouseExited(evt);
             }
         });
-        userBtn1.addActionListener(new java.awt.event.ActionListener() {
+        materialBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userBtn1ActionPerformed(evt);
+                materialBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(userBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 220, 100));
+        jPanel1.add(materialBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 220, 100));
 
-        userBtn2.setBackground(new java.awt.Color(65, 167, 218));
-        userBtn2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        userBtn2.setForeground(new java.awt.Color(255, 255, 255));
-        userBtn2.setText("Inventario");
-        userBtn2.setBorder(null);
-        userBtn2.setBorderPainted(false);
-        userBtn2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        userBtn2.setFocusable(false);
-        userBtn2.addMouseListener(new java.awt.event.MouseAdapter() {
+        inventoryBtn.setBackground(new java.awt.Color(65, 167, 218));
+        inventoryBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        inventoryBtn.setForeground(new java.awt.Color(255, 255, 255));
+        inventoryBtn.setText("Inventario");
+        inventoryBtn.setBorder(null);
+        inventoryBtn.setBorderPainted(false);
+        inventoryBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        inventoryBtn.setFocusable(false);
+        inventoryBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                userBtn2MouseEntered(evt);
+                inventoryBtnMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                userBtn2MouseExited(evt);
+                inventoryBtnMouseExited(evt);
             }
         });
-        userBtn2.addActionListener(new java.awt.event.ActionListener() {
+        inventoryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userBtn2ActionPerformed(evt);
+                inventoryBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(userBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 220, 100));
+        jPanel1.add(inventoryBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 220, 100));
 
-        userBtn3.setBackground(new java.awt.Color(65, 167, 218));
-        userBtn3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        userBtn3.setForeground(new java.awt.Color(255, 255, 255));
-        userBtn3.setText("Editoriales");
-        userBtn3.setBorder(null);
-        userBtn3.setBorderPainted(false);
-        userBtn3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        userBtn3.setFocusable(false);
-        userBtn3.addMouseListener(new java.awt.event.MouseAdapter() {
+        editorialBtn.setBackground(new java.awt.Color(65, 167, 218));
+        editorialBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        editorialBtn.setForeground(new java.awt.Color(255, 255, 255));
+        editorialBtn.setText("Editoriales");
+        editorialBtn.setBorder(null);
+        editorialBtn.setBorderPainted(false);
+        editorialBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editorialBtn.setFocusable(false);
+        editorialBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                userBtn3MouseEntered(evt);
+                editorialBtnMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                userBtn3MouseExited(evt);
+                editorialBtnMouseExited(evt);
             }
         });
-        userBtn3.addActionListener(new java.awt.event.ActionListener() {
+        editorialBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userBtn3ActionPerformed(evt);
+                editorialBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(userBtn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, 220, 100));
+        jPanel1.add(editorialBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, 220, 100));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 690));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void userBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userBtnMouseEntered
-        userBtn.setBackground(pressedButtonColor);
-    }//GEN-LAST:event_userBtnMouseEntered
+    private void creatorBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_creatorBtnMouseEntered
+        creatorBtn.setBackground(pressedButtonColor);
+    }//GEN-LAST:event_creatorBtnMouseEntered
 
-    private void userBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userBtnMouseExited
-        userBtn.setBackground(defaultButtonColor);
-    }//GEN-LAST:event_userBtnMouseExited
+    private void creatorBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_creatorBtnMouseExited
+        creatorBtn.setBackground(defaultButtonColor);
+    }//GEN-LAST:event_creatorBtnMouseExited
 
-    private void userBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtnActionPerformed
-        System.out.println("mouse was clicked");
-        UsersFrm form = new UsersFrm();
-    }//GEN-LAST:event_userBtnActionPerformed
+    private void creatorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creatorBtnActionPerformed
+        CreatorFrm form = new CreatorFrm();
+        setContent(form);
+    }//GEN-LAST:event_creatorBtnActionPerformed
 
-    private void userBtn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userBtn1MouseEntered
+    private void materialBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_materialBtnMouseEntered
+        materialBtn.setBackground(pressedButtonColor);
+    }//GEN-LAST:event_materialBtnMouseEntered
+
+    private void materialBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_materialBtnMouseExited
+        materialBtn.setBackground(defaultButtonColor);
+    }//GEN-LAST:event_materialBtnMouseExited
+
+    private void materialBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_materialBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_userBtn1MouseEntered
+    }//GEN-LAST:event_materialBtnActionPerformed
 
-    private void userBtn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userBtn1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userBtn1MouseExited
+    private void inventoryBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryBtnMouseEntered
+        inventoryBtn.setBackground(pressedButtonColor);
+    }//GEN-LAST:event_inventoryBtnMouseEntered
 
-    private void userBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userBtn1ActionPerformed
+    private void inventoryBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryBtnMouseExited
+        inventoryBtn.setBackground(defaultButtonColor);
+    }//GEN-LAST:event_inventoryBtnMouseExited
 
-    private void userBtn2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userBtn2MouseEntered
+    private void inventoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_userBtn2MouseEntered
+    }//GEN-LAST:event_inventoryBtnActionPerformed
 
-    private void userBtn2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userBtn2MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userBtn2MouseExited
+    private void editorialBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editorialBtnMouseEntered
+        editorialBtn.setBackground(pressedButtonColor);
+    }//GEN-LAST:event_editorialBtnMouseEntered
 
-    private void userBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtn2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userBtn2ActionPerformed
+    private void editorialBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editorialBtnMouseExited
+        editorialBtn.setBackground(defaultButtonColor);
+    }//GEN-LAST:event_editorialBtnMouseExited
 
-    private void userBtn3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userBtn3MouseEntered
+    private void editorialBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editorialBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_userBtn3MouseEntered
-
-    private void userBtn3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userBtn3MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userBtn3MouseExited
-
-    private void userBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtn3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userBtn3ActionPerformed
+    }//GEN-LAST:event_editorialBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton creatorBtn;
+    private javax.swing.JButton editorialBtn;
+    private javax.swing.JButton inventoryBtn;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton userBtn;
-    private javax.swing.JButton userBtn1;
-    private javax.swing.JButton userBtn2;
-    private javax.swing.JButton userBtn3;
+    private javax.swing.JButton materialBtn;
     // End of variables declaration//GEN-END:variables
 }

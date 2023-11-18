@@ -1,7 +1,7 @@
 package desafio4.views;
 
 import controllers.UsersCtrl;
-import helpers.LoggedUser;
+import helpers.ApplicationContext;
 import helpers.Validators;
 import javax.swing.JOptionPane;
 import models.User;
@@ -169,7 +169,7 @@ public class LoginFrm extends javax.swing.JFrame {
         
         User user = controller.getLoggedUser(email);
         
-        LoggedUser.setUser(user);
+        ApplicationContext.setUser(user);
         
         if (user == null) return;
         

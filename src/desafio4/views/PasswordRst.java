@@ -1,7 +1,7 @@
 package desafio4.views;
 
 import controllers.UsersCtrl;
-import helpers.LoggedUser;
+import helpers.ApplicationContext;
 import helpers.Validators;
 import javax.swing.JOptionPane;
 import models.User;
@@ -15,7 +15,7 @@ public class PasswordRst extends javax.swing.JFrame {
 
     public PasswordRst() {
         initComponents();
-        user = LoggedUser.getUser();
+        user = ApplicationContext.getUser();
          this.setLocationRelativeTo(null);
          controller = new UsersCtrl();
          

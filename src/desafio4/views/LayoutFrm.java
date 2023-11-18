@@ -1,6 +1,6 @@
 package desafio4.views;
 
-import helpers.LoggedUser;
+import helpers.ApplicationContext;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -15,8 +15,9 @@ public class LayoutFrm extends javax.swing.JFrame {
 
     public LayoutFrm() {
         initComponents();
+        ApplicationContext.setMainContainer(containerPanel);
         
-        loggedUser = LoggedUser.getUser();
+        loggedUser = ApplicationContext.getUser();
         
         this.setLocationRelativeTo(null);
         
@@ -246,7 +247,8 @@ public class LayoutFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void inventoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryBtnActionPerformed
-        // TODO add your handling code here:
+        SelectionInventoryFrm form = new SelectionInventoryFrm();
+        setContent(form);
     }//GEN-LAST:event_inventoryBtnActionPerformed
 
     private void userBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userBtnMouseEntered
