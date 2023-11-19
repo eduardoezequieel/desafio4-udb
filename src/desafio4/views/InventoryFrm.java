@@ -137,8 +137,9 @@ public class InventoryFrm extends javax.swing.JPanel {
         for (Library library : libraries) {
             if (library.getLibraryName().equals(libraryName)) {
                 item.setLibraryId(library.getLibraryId());
+                break;
             }
-            break;
+            
         }
         
         for (Material material : materials) {
