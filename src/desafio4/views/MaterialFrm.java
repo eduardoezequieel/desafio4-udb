@@ -322,7 +322,7 @@ public class MaterialFrm extends javax.swing.JPanel {
     
     private Material validateMagazines(Material material) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                
+         
         String editorial = (String) editorialMagazineCb.getSelectedItem();
         String publishDate;
 
@@ -333,13 +333,16 @@ public class MaterialFrm extends javax.swing.JPanel {
             return null;
         }
 
+        
+        
+        
         if (editorial.equals("Selecciona una opción")) {
             JOptionPane.showMessageDialog(null, "No se permiten campos vacios.");
             return null;
         }
-
+        
         int editorialId = -1;
-
+        
         for (Editorial editorialObj : editorials) {
             if (editorialObj.getEditorialName().equals(editorial)) {
                 editorialId = editorialObj.getEditorialId();

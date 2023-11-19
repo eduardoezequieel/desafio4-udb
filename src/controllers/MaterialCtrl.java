@@ -176,18 +176,20 @@ public class MaterialCtrl {
             DatabaseConnection dbcn = new DatabaseConnection();
             Connection cn = dbcn.getConnection();
             
-            String sql = "UPDATE material SET title = ?, description = ?, duration = ?, songNumber = ?, publishDate = ?, creatorId = ?, editorialId = ? WHERE code = ?";
-            
+            String sql = "UPDATE material SET title = ?, description = ?, duration = ?, songNumber = ?, publishDate = ?, creatorId = IF(? = 0, NULL, ?), editorialId = IF(? = 0, NULL, ?) WHERE code = ?";
+
             PreparedStatement pst = cn.prepareStatement(sql);
-            
+
             pst.setString(1, material.getTitle());
             pst.setString(2, material.getDescription());
             pst.setString(3, material.getDuration());
             pst.setInt(4, material.getSongNumber());
             pst.setString(5, material.getPublishDate());
             pst.setInt(6, material.getCreatorId());
-            pst.setInt(7, material.getEditorialId());
-            pst.setString(8, material.getCode());
+            pst.setInt(7, material.getCreatorId());
+            pst.setInt(8, material.getEditorialId());
+            pst.setInt(9, material.getEditorialId());
+            pst.setString(10, material.getCode());
             
             if(!pst.execute()) response = true;
     
