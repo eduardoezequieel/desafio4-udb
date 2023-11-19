@@ -176,7 +176,8 @@ public class SelectionInventoryFrm extends javax.swing.JPanel {
     }//GEN-LAST:event_inventoryBtnMouseExited
 
     private void inventoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryBtnActionPerformed
-        // TODO add your handling code here:
+        BaseInventoryFrm form = new BaseInventoryFrm();
+        setContent(form);
     }//GEN-LAST:event_inventoryBtnActionPerformed
 
     private void editorialBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editorialBtnMouseEntered

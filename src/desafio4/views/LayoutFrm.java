@@ -284,7 +284,6 @@ public class LayoutFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutBtnMouseExited
 
     private void userBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtnActionPerformed
-        System.out.println("mouse was clicked");
         UsersFrm form = new UsersFrm();
         setContent(form);
     }//GEN-LAST:event_userBtnActionPerformed
@@ -298,7 +297,8 @@ public class LayoutFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_permissionBtnMouseExited
 
     private void permissionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_permissionBtnActionPerformed
-        // TODO add your handling code here:
+        LoanFrm form = new LoanFrm();
+        setContent(form);
     }//GEN-LAST:event_permissionBtnActionPerformed
 
     private void configBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configBtnMouseEntered
