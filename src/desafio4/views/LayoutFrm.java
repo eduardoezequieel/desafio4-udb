@@ -32,9 +32,11 @@ public class LayoutFrm extends javax.swing.JFrame {
         if (loggedUser.getUserTypeName().equals("Administrador")) {
             adminButtons.setVisible(true);
             userButtons.setVisible(false);
+            configBtn.setVisible(true);
         } else {
             adminButtons.setVisible(false);
             userButtons.setVisible(true);
+            configBtn.setVisible(false);
         }
     }
 
