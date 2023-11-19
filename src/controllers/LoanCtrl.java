@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -94,6 +96,51 @@ public class LoanCtrl {
             response = -1;
         }
         
+        return response;
+    }
+    
+    public int checkIfUserHasAPendingLoan(String code) {
+        int response = 0;
+
+        try {
+            DatabaseConnection dbcn = new DatabaseConnection();
+            Connection cn = dbcn.getConnection();
+
+            String sql = "SELECT * FROM loan WHERE userId = ? AND (loanStateId = 2 OR loanStateId = 3)";
+
+            PreparedStatement pst = cn.prepareStatement(sql);
+
+            pst.setString(1, code);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String endDateString = rs.getString("endDate");
+                int loanId = rs.getInt("loanId");
+
+                LocalDate endDate = LocalDate.parse(endDateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+                // Obtener la fecha actual
+                LocalDate currentDate = LocalDate.now();
+
+                // Comparar las fechas
+                if (endDate.isBefore(currentDate)) {
+                    response = 1;
+                    markLoanWithFee(loanId);
+                } else {
+                    // La fecha aún no ha vencido
+                    response = 0;
+                }
+            }
+
+            cn.close();
+            pst.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Sucedio un error al verificar si el material está en un préstamo activo. Por favor contacta con el administrador.");
+            response = -1;
+        }
+
         return response;
     }
     
@@ -208,6 +255,31 @@ public class LoanCtrl {
             pst.setInt(2, loanId);
             
             System.out.println(pst.toString());
+            
+            if(!pst.execute()) response = true;
+            
+            cn.close();
+            pst.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Sucedio un error al aprobar el prestamo. Por favor contacta con el administrador.");
+            System.out.println(e.getMessage());
+        }
+        
+        return response;
+    }
+    
+    public boolean markLoanWithFee(int loanId) {
+        boolean response = false;
+        
+        try {
+            DatabaseConnection dbcn = new DatabaseConnection();
+            Connection cn = dbcn.getConnection();
+            
+            String sql = "UPDATE loan SET loanStateId = 3 WHERE loanId = ?";
+            
+            PreparedStatement pst = cn.prepareStatement(sql);
+            
+            pst.setInt(1, loanId);
             
             if(!pst.execute()) response = true;
             

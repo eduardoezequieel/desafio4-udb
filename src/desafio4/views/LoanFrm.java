@@ -315,6 +315,15 @@ public class LoanFrm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Ha sobrepasado la cantidad de materiales permtidos para prestar ("+ApplicationContext.getAllowedMaterials()+").");
         }
         
+        int hasPendingLoan = loanController.checkIfUserHasAPendingLoan(ApplicationContext.getUser().getIdentificationCode());
+        
+        if (hasPendingLoan == 1) {
+            JOptionPane.showMessageDialog(null, "Usted posee un prestamo en mora, no tiene permitido realizar más.");
+            return;
+        } else if( hasPendingLoan == -1) {
+            return;
+        }
+        
         for (Inventory selectedItem : selectedItems) {
             int response = loanController.materialIsAlreadyBorrowed(selectedItem.getInventoryId());
             
