@@ -16,6 +16,7 @@ public class LayoutFrm extends javax.swing.JFrame {
     public LayoutFrm() {
         initComponents();
         ApplicationContext.setMainContainer(containerPanel);
+        ApplicationContext.setTitleRef(titleLbl);
         
         loggedUser = ApplicationContext.getUser();
         
@@ -26,6 +27,7 @@ public class LayoutFrm extends javax.swing.JFrame {
         
         userLbl.setText(loggedUser.getName());
         userTypeLbl.setText(loggedUser.getUserTypeName());
+        ApplicationContext.setTitleValue("Inicio | Libreria");
     }
 
     
@@ -53,6 +55,7 @@ public class LayoutFrm extends javax.swing.JFrame {
         configBtn = new javax.swing.JButton();
         navbar = new javax.swing.JPanel();
         exitBtn = new javax.swing.JButton();
+        titleLbl = new javax.swing.JLabel();
         containerPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -223,6 +226,11 @@ public class LayoutFrm extends javax.swing.JFrame {
         });
         navbar.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 0, 30, 30));
 
+        titleLbl.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        titleLbl.setForeground(new java.awt.Color(255, 255, 255));
+        titleLbl.setText("Nombre de la pantalla");
+        navbar.add(titleLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, -1, 20));
+
         getContentPane().add(navbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1070, 30));
 
         containerPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -321,6 +329,7 @@ public class LayoutFrm extends javax.swing.JFrame {
     private javax.swing.JPanel navbar;
     private javax.swing.JButton permissionBtn;
     private javax.swing.JPanel sidebar;
+    private javax.swing.JLabel titleLbl;
     private javax.swing.JButton userBtn;
     private javax.swing.JLabel userLbl;
     private javax.swing.JLabel userTypeLbl;

@@ -1,6 +1,7 @@
 package desafio4.views;
 
 import controllers.UsersCtrl;
+import helpers.ApplicationContext;
 import helpers.Validators;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -26,6 +27,8 @@ public class UsersFrm extends javax.swing.JPanel {
         
         Validators.allowNumbers(phoneTxt, 8);
         noSelectedDataMode();
+        
+        ApplicationContext.setTitleValue("Usuarios | Libreria");
     }
     
     public void initData() {

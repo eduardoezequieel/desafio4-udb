@@ -15,6 +15,54 @@ public class LoginFrm extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         controller = new UsersCtrl();
     }
+    
+    private void login() {
+    String email = userTxt.getText().trim();
+        String password = passwordTxt.getText().trim();
+        
+        if (email.length() == 0 || password.length() == 0) {
+            JOptionPane.showMessageDialog(null, "No se permiten campos vacios");
+            return;
+        }
+        
+        boolean isEmailValid = Validators.matchesRegex(email, Validators.getEmailRegex());
+        
+        if(!isEmailValid) {
+            JOptionPane.showMessageDialog(null, "El correo electrónico ingresado es invalido.");
+            return;
+        }
+        
+        boolean userExists = controller.checkIfUserExists(email);
+        
+        if (!userExists) {
+            JOptionPane.showMessageDialog(null, "El usuario que usted ha ingresado no existe en nuestros registros. Lo sentimos.");
+            return;
+        }
+        
+        boolean isLoggedIn = controller.checkPassword(email, password);
+        
+        if (!isLoggedIn) {
+            JOptionPane.showMessageDialog(null, "Tu contraseña es incorrecta.");
+            return;
+        }
+        
+        User user = controller.getLoggedUser(email);
+        
+        ApplicationContext.setUser(user);
+        
+        if (user == null) return;
+        
+        if(password.equals("contraseña123")) {
+            this.dispose();
+            PasswordRst form = new PasswordRst();
+            form.setVisible(true);
+            return;
+        }
+        
+        this.dispose();
+        LayoutFrm form = new LayoutFrm();
+        form.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,7 +114,6 @@ public class LoginFrm extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(245, 251, 248));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        userTxt.setBackground(new java.awt.Color(255, 255, 255));
         userTxt.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         userTxt.setForeground(new java.awt.Color(51, 51, 51));
         userTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(200, 212, 218), 1, true));
@@ -92,10 +139,14 @@ public class LoginFrm extends javax.swing.JFrame {
         jLabel3.setText("Usuario");
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
-        passwordTxt.setBackground(new java.awt.Color(255, 255, 255));
         passwordTxt.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         passwordTxt.setForeground(new java.awt.Color(51, 51, 51));
         passwordTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(200, 212, 218), 1, true));
+        passwordTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordTxtKeyPressed(evt);
+            }
+        });
         jPanel4.add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 340, 40));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 400, 240));
@@ -138,51 +189,7 @@ public class LoginFrm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueBtnActionPerformed
-        String email = userTxt.getText().trim();
-        String password = passwordTxt.getText().trim();
-        
-        if (email.length() == 0 || password.length() == 0) {
-            JOptionPane.showMessageDialog(null, "No se permiten campos vacios");
-            return;
-        }
-        
-        boolean isEmailValid = Validators.matchesRegex(email, Validators.getEmailRegex());
-        
-        if(!isEmailValid) {
-            JOptionPane.showMessageDialog(null, "El correo electrónico ingresado es invalido.");
-            return;
-        }
-        
-        boolean userExists = controller.checkIfUserExists(email);
-        
-        if (!userExists) {
-            JOptionPane.showMessageDialog(null, "El usuario que usted ha ingresado no existe en nuestros registros. Lo sentimos.");
-            return;
-        }
-        
-        boolean isLoggedIn = controller.checkPassword(email, password);
-        
-        if (!isLoggedIn) {
-            JOptionPane.showMessageDialog(null, "Tu contraseña es incorrecta.");
-            return;
-        }
-        
-        User user = controller.getLoggedUser(email);
-        
-        ApplicationContext.setUser(user);
-        
-        if (user == null) return;
-        
-        if(password.equals("contraseña123")) {
-            this.dispose();
-            PasswordRst form = new PasswordRst();
-            form.setVisible(true);
-            return;
-        }
-        
-        this.dispose();
-        LayoutFrm form = new LayoutFrm();
-        form.setVisible(true);
+        login();
     }//GEN-LAST:event_continueBtnActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
@@ -205,6 +212,14 @@ public class LoginFrm extends javax.swing.JFrame {
             userTxt.setText(email.substring(0, 99));
         }
     }//GEN-LAST:event_userTxtKeyReleased
+
+    private void passwordTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTxtKeyPressed
+        int pressedKey = evt.getKeyCode();
+        
+        if (pressedKey == 10) {
+            login();
+        }
+    }//GEN-LAST:event_passwordTxtKeyPressed
 
     /**
      * @param args the command line arguments

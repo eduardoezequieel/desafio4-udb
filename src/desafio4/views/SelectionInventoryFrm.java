@@ -14,6 +14,8 @@ public class SelectionInventoryFrm extends javax.swing.JPanel {
         initComponents();
         
         containerPanel = ApplicationContext.getMainContainer();
+        
+        ApplicationContext.setTitleValue("Inventario | Libreria");
     }
     
     private void setContent(JPanel content) {
@@ -161,7 +163,8 @@ public class SelectionInventoryFrm extends javax.swing.JPanel {
     }//GEN-LAST:event_materialBtnMouseExited
 
     private void materialBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_materialBtnActionPerformed
-        // TODO add your handling code here:
+        BaseMaterialFrm form = new BaseMaterialFrm();
+        setContent(form);
     }//GEN-LAST:event_materialBtnActionPerformed
 
     private void inventoryBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryBtnMouseEntered
@@ -185,7 +188,8 @@ public class SelectionInventoryFrm extends javax.swing.JPanel {
     }//GEN-LAST:event_editorialBtnMouseExited
 
     private void editorialBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editorialBtnActionPerformed
-        // TODO add your handling code here:
+        EditorialFrm form = new EditorialFrm();
+        setContent(form);
     }//GEN-LAST:event_editorialBtnActionPerformed
 
 
