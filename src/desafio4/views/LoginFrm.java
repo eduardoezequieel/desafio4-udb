@@ -142,6 +142,11 @@ public class LoginFrm extends javax.swing.JFrame {
         passwordTxt.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         passwordTxt.setForeground(new java.awt.Color(51, 51, 51));
         passwordTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(200, 212, 218), 1, true));
+        passwordTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordTxtActionPerformed(evt);
+            }
+        });
         passwordTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 passwordTxtKeyPressed(evt);
@@ -211,6 +216,11 @@ public class LoginFrm extends javax.swing.JFrame {
         if(!isOk) {
             userTxt.setText(email.substring(0, 99));
         }
+        int pressedKey = evt.getKeyCode();
+        
+        if (pressedKey == 10) {
+            login();
+        }
     }//GEN-LAST:event_userTxtKeyReleased
 
     private void passwordTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTxtKeyPressed
@@ -220,6 +230,10 @@ public class LoginFrm extends javax.swing.JFrame {
             login();
         }
     }//GEN-LAST:event_passwordTxtKeyPressed
+
+    private void passwordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordTxtActionPerformed
 
     /**
      * @param args the command line arguments

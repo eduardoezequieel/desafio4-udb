@@ -10,6 +10,7 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import models.Inventory;
+import java.util.ArrayList;
 
 public class BaseInventoryFrm extends javax.swing.JPanel {
     private JPanel containerPanel;
@@ -24,6 +25,8 @@ public class BaseInventoryFrm extends javax.swing.JPanel {
         controller = new InventoryCtrl();
         
         initData();
+        
+        //makeTableReadOnly();
         
         noSelectedDataMode();
     }
@@ -51,6 +54,8 @@ public class BaseInventoryFrm extends javax.swing.JPanel {
         }
         
         inventoryTbl.setModel(tableModel);
+        
+        inventoryTbl.setDefaultEditor(Object.class, null);
     }
     
     public void noSelectedDataMode() {
@@ -260,7 +265,9 @@ public class BaseInventoryFrm extends javax.swing.JPanel {
     }//GEN-LAST:event_searchTxtKeyReleased
 
     private void searchTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTxtKeyTyped
+
         DefaultTableModel model = (DefaultTableModel) inventoryTbl.getModel();
+  
         TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<DefaultTableModel>(model);
         
         inventoryTbl.setRowSorter(rowSorter);
@@ -271,7 +278,6 @@ public class BaseInventoryFrm extends javax.swing.JPanel {
         int modelRowIndex = inventoryTbl.convertRowIndexToModel(inventoryTbl.getSelectedRow());
 
         int id = (Integer) inventoryTbl.getModel().getValueAt(modelRowIndex, 0);
-        
         for (Inventory item : inventory) {
             if (item.getInventoryId() == id) {
                 selectedInventory = item;

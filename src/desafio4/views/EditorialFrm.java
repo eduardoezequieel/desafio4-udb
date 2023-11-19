@@ -77,6 +77,8 @@ public class EditorialFrm extends javax.swing.JPanel {
         }
         
         editorialTbl.setModel(tableModel);
+        editorialTbl.setDefaultEditor(Object.class, null);
+
     }
 
     /**

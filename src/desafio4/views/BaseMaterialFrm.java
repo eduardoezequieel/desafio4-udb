@@ -49,6 +49,7 @@ public class BaseMaterialFrm extends javax.swing.JPanel {
         }
         
         materialTbl.setModel(tableModel);
+        materialTbl.setDefaultEditor(Object.class, null);
     }
     
     public void noSelectedDataMode() {

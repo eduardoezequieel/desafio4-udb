@@ -74,6 +74,8 @@ public class UsersFrm extends javax.swing.JPanel {
         }
         
         userTbl.setModel(tableModel);
+        userTbl.setDefaultEditor(Object.class, null);
+
     }
     
     public void clearFields() {

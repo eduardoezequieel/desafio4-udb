@@ -75,6 +75,8 @@ public class CreatorFrm extends javax.swing.JPanel {
         }
         
         creatorTbl.setModel(tableModel);
+        
+        creatorTbl.setDefaultEditor(Object.class, null);
     }
 
     /**
