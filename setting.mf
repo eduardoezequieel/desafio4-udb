@@ -96,7 +96,7 @@ public void mostrarUserTypesEnJTable(List<UserType> userTypes) {
     }
  
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
@@ -157,6 +157,11 @@ public void mostrarUserTypesEnJTable(List<UserType> userTypes) {
 
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setBackground(new java.awt.Color(82, 190, 127));
@@ -166,11 +171,6 @@ public void mostrarUserTypesEnJTable(List<UserType> userTypes) {
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
             }
         });
 
@@ -184,13 +184,11 @@ public void mostrarUserTypesEnJTable(List<UserType> userTypes) {
                     .addComponent(jLabel1)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(usuarioTypeCb, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cantidadPrestamosTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jButton1)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel2)
-                                .addGap(6, 6, 6))
-                            .addComponent(jButton1))
+                                .addComponent(usuarioTypeCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cantidadPrestamosTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(206, 206, 206))
@@ -229,7 +227,7 @@ public void mostrarUserTypesEnJTable(List<UserType> userTypes) {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(154, 168, 180));
-        jLabel4.setText("Tarifa");
+        jLabel4.setText("Tarifa mora");
 
         tarifaTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -338,21 +336,40 @@ public void mostrarUserTypesEnJTable(List<UserType> userTypes) {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void cantidadPrestamosTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidadPrestamosTxtActionPerformed
+    private void cantidadPrestamosTxtActionPerformed(java.awt.event.ActionEvent evt) {                                                     
         // TODO add your handling code here:
-    }//GEN-LAST:event_cantidadPrestamosTxtActionPerformed
+    }                                                    
 
-    private void yearTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearTxtActionPerformed
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {                                      
+       String userTypeName = usuarioTypeCb.getSelectedItem().toString();
+        int nuevosMateriales;
+
+        try {
+            nuevosMateriales = Integer.parseInt(cantidadPrestamosTxt.getText());
+
+            if (nuevosMateriales < 0) {
+                JOptionPane.showMessageDialog(null, "La cantidad de materiales no puede ser negativa.");
+                return;
+            }
+
+            permisosCtrl.actualizarMaterialesPermitidos(userTypeName, nuevosMateriales);
+            mostrarUserTypesEnJTable(permisosCtrl.getTwoUsergetTypes());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para la cantidad de materiales.");
+        }
+    }                                     
+
+    private void yearTxtActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
-    }//GEN-LAST:event_yearTxtActionPerformed
+    }                                       
 
-    private void tarifaTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarifaTxtActionPerformed
+    private void tarifaTxtActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    }//GEN-LAST:event_tarifaTxtActionPerformed
+    }                                         
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {                                      
         String year = yearTxt.getText();
         String costo = tarifaTxt.getText();
 
@@ -368,9 +385,9 @@ public void mostrarUserTypesEnJTable(List<UserType> userTypes) {
         // Volver a cargar los datos actualizados en la JTable2
         mostrarResultadosYearlyOverdueTable();
     
-    }//GEN-LAST:event_jButton2MouseClicked
+    }                                     
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {                                     
     int selectedRow = jTable1.getSelectedRow();
 
     
@@ -384,9 +401,9 @@ public void mostrarUserTypesEnJTable(List<UserType> userTypes) {
         cantidadPrestamosTxt.setText(allowedBorrowedMaterials);
     }
 
-    }//GEN-LAST:event_jTable1MouseClicked
+    }                                    
 
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {                                     
         int selectedRow = jTable2.getSelectedRow();
 
     
@@ -400,44 +417,14 @@ public void mostrarUserTypesEnJTable(List<UserType> userTypes) {
         tarifaTxt.setText(cost);
     }
 
-    }//GEN-LAST:event_jTable2MouseClicked
+    }                                    
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-          String userTypeName = usuarioTypeCb.getSelectedItem().toString();
-        int nuevosMateriales;
- 
-        try {
-            nuevosMateriales = Integer.parseInt(cantidadPrestamosTxt.getText());
- 
-            if (nuevosMateriales < 0) {
-                JOptionPane.showMessageDialog(null, "La cantidad de materiales no puede ser negativa.");
-                return;
-            }
- 
-            // Asegúrate de crear una instancia de la clase PermisosCrtl antes de usarla
-            PermisosCtrl permisosCtrl = new PermisosCtrl();
- 
-            // Corrige el nombre del método a actualizarMaterialesPermitidos
-            permisosCtrl.actualizarMaterialesPermitidos(userTypeName, nuevosMateriales);
- 
-            // Asegúrate de que permisosCtrl.getTwoUsergetTypes() devuelva una lista válida de UserType
-            mostrarUserTypesEnJTable(permisosCtrl.getTwoUsergetTypes());
- 
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para la cantidad de materiales.");
-        }
-    }//GEN-LAST:event_jButton1MouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }                                        
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JTextField cantidadPrestamosTxt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -455,7 +442,9 @@ public void mostrarUserTypesEnJTable(List<UserType> userTypes) {
     private javax.swing.JTextField tarifaTxt;
     private javax.swing.JComboBox<String> usuarioTypeCb;
     private javax.swing.JTextField yearTxt;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 
 
 }
+
+

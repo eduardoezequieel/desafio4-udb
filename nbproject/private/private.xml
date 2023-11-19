@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Eduardo%20Lopez/Documents/UdbProjects/desafio4-udb/src/desafio4/views/UsersFrm.java</file>
-            <file>file:/C:/Users/Eduardo%20Lopez/Documents/UdbProjects/desafio4-udb/src/desafio4/views/SelectionInventoryFrm.java</file>
-            <file>file:/C:/Users/Eduardo%20Lopez/Documents/UdbProjects/desafio4-udb/src/desafio4/views/LoginFrm.java</file>
-            <file>file:/C:/Users/Eduardo%20Lopez/Documents/UdbProjects/desafio4-udb/src/desafio4/views/PasswordRst.java</file>
-            <file>file:/C:/Users/Eduardo%20Lopez/Documents/UdbProjects/desafio4-udb/src/desafio4/views/LayoutFrm.java</file>
+            <file>file:/C:/Users/Diego%20Esnard/Downloads/desafio4-udb/src/desafio4/views/LayoutFrm.java</file>
+            <file>file:/C:/Users/Diego%20Esnard/Downloads/desafio4-udb/src/desafio4/views/SettingFrm.java</file>
+            <file>file:/C:/Users/Diego%20Esnard/Downloads/desafio4-udb/src/desafio4/views/UsersFrm.java</file>
+            <file>file:/C:/Users/Diego%20Esnard/Downloads/desafio4-udb/src/controllers/UsersCtrl.java</file>
+            <file>file:/C:/Users/Diego%20Esnard/Downloads/desafio4-udb/src/controllers/PermisosCtrl.java</file>
         </group>
     </open-files>
 </project-private>
