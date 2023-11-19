@@ -28,6 +28,14 @@ public class LayoutFrm extends javax.swing.JFrame {
         userLbl.setText(loggedUser.getName());
         userTypeLbl.setText(loggedUser.getUserTypeName());
         ApplicationContext.setTitleValue("Inicio | Libreria");
+        
+        if (loggedUser.getUserTypeName().equals("Administrador")) {
+            adminButtons.setVisible(true);
+            userButtons.setVisible(false);
+        } else {
+            adminButtons.setVisible(false);
+            userButtons.setVisible(true);
+        }
     }
 
     
@@ -46,13 +54,17 @@ public class LayoutFrm extends javax.swing.JFrame {
 
         sidebar = new javax.swing.JPanel();
         logoutBtn = new javax.swing.JButton();
-        userBtn = new javax.swing.JButton();
         userTypeLbl = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         userLbl = new javax.swing.JLabel();
-        inventoryBtn = new javax.swing.JButton();
-        permissionBtn = new javax.swing.JButton();
         configBtn = new javax.swing.JButton();
+        adminButtons = new javax.swing.JPanel();
+        permissionBtn1 = new javax.swing.JButton();
+        permissionBtn = new javax.swing.JButton();
+        inventoryBtn = new javax.swing.JButton();
+        userBtn = new javax.swing.JButton();
+        userButtons = new javax.swing.JPanel();
+        permissionBtn3 = new javax.swing.JButton();
         navbar = new javax.swing.JPanel();
         exitBtn = new javax.swing.JButton();
         titleLbl = new javax.swing.JLabel();
@@ -91,31 +103,6 @@ public class LayoutFrm extends javax.swing.JFrame {
         });
         sidebar.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, 170, 40));
 
-        userBtn.setBackground(new java.awt.Color(65, 167, 218));
-        userBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        userBtn.setForeground(new java.awt.Color(255, 255, 255));
-        userBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desafio4/resources/user.png"))); // NOI18N
-        userBtn.setText("   Usuarios");
-        userBtn.setBorder(null);
-        userBtn.setBorderPainted(false);
-        userBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        userBtn.setFocusable(false);
-        userBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        userBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                userBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                userBtnMouseExited(evt);
-            }
-        });
-        userBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userBtnActionPerformed(evt);
-            }
-        });
-        sidebar.add(userBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 170, 40));
-
         userTypeLbl.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
         userTypeLbl.setForeground(new java.awt.Color(255, 255, 255));
         userTypeLbl.setText("Administrador");
@@ -130,56 +117,6 @@ public class LayoutFrm extends javax.swing.JFrame {
         userLbl.setForeground(new java.awt.Color(255, 255, 255));
         userLbl.setText("Eduardo López");
         sidebar.add(userLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 170, -1));
-
-        inventoryBtn.setBackground(new java.awt.Color(65, 167, 218));
-        inventoryBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        inventoryBtn.setForeground(new java.awt.Color(255, 255, 255));
-        inventoryBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desafio4/resources/library-svgrepo-com.png"))); // NOI18N
-        inventoryBtn.setText("   Inventario");
-        inventoryBtn.setBorder(null);
-        inventoryBtn.setBorderPainted(false);
-        inventoryBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        inventoryBtn.setFocusable(false);
-        inventoryBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        inventoryBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                inventoryBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                inventoryBtnMouseExited(evt);
-            }
-        });
-        inventoryBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inventoryBtnActionPerformed(evt);
-            }
-        });
-        sidebar.add(inventoryBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 170, 40));
-
-        permissionBtn.setBackground(new java.awt.Color(65, 167, 218));
-        permissionBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        permissionBtn.setForeground(new java.awt.Color(255, 255, 255));
-        permissionBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desafio4/resources/share-2-svgrepo-com.png"))); // NOI18N
-        permissionBtn.setText("   Prestamos");
-        permissionBtn.setBorder(null);
-        permissionBtn.setBorderPainted(false);
-        permissionBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        permissionBtn.setFocusable(false);
-        permissionBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        permissionBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                permissionBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                permissionBtnMouseExited(evt);
-            }
-        });
-        permissionBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                permissionBtnActionPerformed(evt);
-            }
-        });
-        sidebar.add(permissionBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 170, 40));
 
         configBtn.setBackground(new java.awt.Color(65, 167, 218));
         configBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -208,6 +145,141 @@ public class LayoutFrm extends javax.swing.JFrame {
             }
         });
         sidebar.add(configBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, 170, 40));
+
+        adminButtons.setBackground(new java.awt.Color(65, 167, 218));
+        adminButtons.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        permissionBtn1.setBackground(new java.awt.Color(65, 167, 218));
+        permissionBtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        permissionBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        permissionBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desafio4/resources/hand-svgrepo-com.png"))); // NOI18N
+        permissionBtn1.setText("   Devoluciones");
+        permissionBtn1.setBorder(null);
+        permissionBtn1.setBorderPainted(false);
+        permissionBtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        permissionBtn1.setFocusable(false);
+        permissionBtn1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        permissionBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                permissionBtn1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                permissionBtn1MouseExited(evt);
+            }
+        });
+        permissionBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                permissionBtn1ActionPerformed(evt);
+            }
+        });
+        adminButtons.add(permissionBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 170, 40));
+
+        permissionBtn.setBackground(new java.awt.Color(65, 167, 218));
+        permissionBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        permissionBtn.setForeground(new java.awt.Color(255, 255, 255));
+        permissionBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desafio4/resources/share-2-svgrepo-com.png"))); // NOI18N
+        permissionBtn.setText("   Prestamos");
+        permissionBtn.setBorder(null);
+        permissionBtn.setBorderPainted(false);
+        permissionBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        permissionBtn.setFocusable(false);
+        permissionBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        permissionBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                permissionBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                permissionBtnMouseExited(evt);
+            }
+        });
+        permissionBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                permissionBtnActionPerformed(evt);
+            }
+        });
+        adminButtons.add(permissionBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 170, 40));
+
+        inventoryBtn.setBackground(new java.awt.Color(65, 167, 218));
+        inventoryBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        inventoryBtn.setForeground(new java.awt.Color(255, 255, 255));
+        inventoryBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desafio4/resources/library-svgrepo-com.png"))); // NOI18N
+        inventoryBtn.setText("   Inventario");
+        inventoryBtn.setBorder(null);
+        inventoryBtn.setBorderPainted(false);
+        inventoryBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        inventoryBtn.setFocusable(false);
+        inventoryBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        inventoryBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                inventoryBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                inventoryBtnMouseExited(evt);
+            }
+        });
+        inventoryBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inventoryBtnActionPerformed(evt);
+            }
+        });
+        adminButtons.add(inventoryBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 170, 40));
+
+        userBtn.setBackground(new java.awt.Color(65, 167, 218));
+        userBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        userBtn.setForeground(new java.awt.Color(255, 255, 255));
+        userBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desafio4/resources/user.png"))); // NOI18N
+        userBtn.setText("   Usuarios");
+        userBtn.setBorder(null);
+        userBtn.setBorderPainted(false);
+        userBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        userBtn.setFocusable(false);
+        userBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        userBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                userBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                userBtnMouseExited(evt);
+            }
+        });
+        userBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userBtnActionPerformed(evt);
+            }
+        });
+        adminButtons.add(userBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 170, 40));
+
+        sidebar.add(adminButtons, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 210, 210));
+
+        userButtons.setBackground(new java.awt.Color(65, 167, 218));
+        userButtons.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        permissionBtn3.setBackground(new java.awt.Color(65, 167, 218));
+        permissionBtn3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        permissionBtn3.setForeground(new java.awt.Color(255, 255, 255));
+        permissionBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/desafio4/resources/share-2-svgrepo-com.png"))); // NOI18N
+        permissionBtn3.setText("   Prestamos");
+        permissionBtn3.setBorder(null);
+        permissionBtn3.setBorderPainted(false);
+        permissionBtn3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        permissionBtn3.setFocusable(false);
+        permissionBtn3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        permissionBtn3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                permissionBtn3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                permissionBtn3MouseExited(evt);
+            }
+        });
+        permissionBtn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                permissionBtn3ActionPerformed(evt);
+            }
+        });
+        userButtons.add(permissionBtn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 170, 40));
+
+        sidebar.add(userButtons, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 210, 210));
 
         getContentPane().add(sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 720));
 
@@ -310,7 +382,7 @@ public class LayoutFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_configBtnMouseExited
 
     private void configBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configBtnActionPerformed
-        System.out.println("test");
+
     }//GEN-LAST:event_configBtnActionPerformed
 
     private void configBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configBtnMouseClicked
@@ -318,8 +390,35 @@ public class LayoutFrm extends javax.swing.JFrame {
          setContent(form);
     }//GEN-LAST:event_configBtnMouseClicked
 
+    private void permissionBtn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_permissionBtn1MouseEntered
+        permissionBtn1.setBackground(pressedButtonColor);
+    }//GEN-LAST:event_permissionBtn1MouseEntered
+
+    private void permissionBtn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_permissionBtn1MouseExited
+        permissionBtn1.setBackground(defaultButtonColor);
+    }//GEN-LAST:event_permissionBtn1MouseExited
+
+    private void permissionBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_permissionBtn1ActionPerformed
+        ReturnFrm form = new ReturnFrm();
+        setContent(form);
+    }//GEN-LAST:event_permissionBtn1ActionPerformed
+
+    private void permissionBtn3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_permissionBtn3MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_permissionBtn3MouseEntered
+
+    private void permissionBtn3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_permissionBtn3MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_permissionBtn3MouseExited
+
+    private void permissionBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_permissionBtn3ActionPerformed
+        LoanFrm form = new LoanFrm();
+        setContent(form);
+    }//GEN-LAST:event_permissionBtn3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel adminButtons;
     private javax.swing.JButton configBtn;
     private javax.swing.JPanel containerPanel;
     private javax.swing.JButton exitBtn;
@@ -328,9 +427,12 @@ public class LayoutFrm extends javax.swing.JFrame {
     private javax.swing.JButton logoutBtn;
     private javax.swing.JPanel navbar;
     private javax.swing.JButton permissionBtn;
+    private javax.swing.JButton permissionBtn1;
+    private javax.swing.JButton permissionBtn3;
     private javax.swing.JPanel sidebar;
     private javax.swing.JLabel titleLbl;
     private javax.swing.JButton userBtn;
+    private javax.swing.JPanel userButtons;
     private javax.swing.JLabel userLbl;
     private javax.swing.JLabel userTypeLbl;
     // End of variables declaration//GEN-END:variables

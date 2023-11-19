@@ -51,8 +51,6 @@ public class UsersCtrl {
             DatabaseConnection dbcn = new DatabaseConnection();
             Connection cn = dbcn.getConnection();
             
-            User user = ApplicationContext.getUser();
-            
             String sql = "SELECT*FROM usertype";
             Statement st = cn.createStatement();
             
@@ -296,7 +294,7 @@ public class UsersCtrl {
             DatabaseConnection dbcn = new DatabaseConnection();
             Connection cn = dbcn.getConnection();
             
-            String sql = "SELECT identificationCode, email, ut.userTypeName, name FROM user u INNER JOIN usertype ut ON ut.usertypeid = u.usertypeid WHERE email = ?";
+            String sql = "SELECT identificationCode, email, ut.userTypeName, ut.allowedBorrowedMaterials, name FROM user u INNER JOIN usertype ut ON ut.usertypeid = u.usertypeid WHERE email = ?";
             PreparedStatement pst = cn.prepareStatement(sql);
             
             pst.setString(1, email);
@@ -310,6 +308,7 @@ public class UsersCtrl {
                 user.setEmail(rs.getString("email"));
                 user.setUserTypeName(rs.getString("userTypeName"));
                 user.setName(rs.getString("name"));
+                ApplicationContext.setAllowedMaterials(rs.getInt("allowedBorrowedMaterials"));
             }
             
             cn.close();

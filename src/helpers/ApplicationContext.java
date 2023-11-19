@@ -6,6 +6,7 @@ import models.User;
 
 public class ApplicationContext {
     private static User user;
+    private static int allowedMaterials;
     private static JPanel mainContainer;
     private static JLabel title;
     
@@ -21,6 +22,14 @@ public class ApplicationContext {
     
     public static JPanel getMainContainer() {
         return mainContainer;
+    }
+    
+    public static int getAllowedMaterials() {
+        return allowedMaterials;
+    }
+
+    public static void setAllowedMaterials(int allowedMaterials) {
+        ApplicationContext.allowedMaterials = allowedMaterials;
     }
 
     public static void setMainContainer(JPanel mainContainer) {
